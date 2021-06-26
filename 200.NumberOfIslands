@@ -1,0 +1,29 @@
+class Solution {
+    public int numIslands(char[][] grid) {
+        if(grid == null || grid.length==0 ) return 0;
+        boolean[][] visited = new boolean[grid.length][grid[0].length]; // simply to mark visited
+        int count=0; //to count no. of islands
+        for(int i=0; i < grid.length;i++){
+            for(int j=0; j<grid[i].length; j++){
+                if(grid[i][j] == '1' && visited[i][j]==false){  // this will only run when the vertices is not                                                                                                 //visited and equal to 1
+                    drawIsland(grid,i,j,visited); // then we will call function
+                    count++;   // if island is foundthen increase count
+                }
+                
+            }}
+        return count;
+    }
+    
+    public static void drawIsland(char[][] grid,int i,int j ,boolean[][] visited){
+        if(i<0 || j<0 || i>=grid.length||j>=grid[i].length || grid[i][j] == '0'||  visited[i][j]==true)
+		// this condition check if  i , j should  be less than 0,and vertice is equal to 0 and also visited then return from here only 
+             return;
+        
+        visited[i][j]=true; // if above if block is false mark vertice visited
+        drawIsland(grid, i-1 , j , visited);
+        drawIsland(grid, i , j+1 , visited);
+        drawIsland(grid, i , j-1 , visited);
+        drawIsland(grid, i+1 , j , visited);
+		// these 4 will visit all neighbours
+    }
+}
